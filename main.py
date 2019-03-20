@@ -1,35 +1,48 @@
 import random
+import os, time
 
 words = []
 file = open('secretwords.txt' , 'r')
 words = file.read().splitlines()
 secret_word = random.choice(words)
 
-print("----------------------------------------")
-print("SKRIV BARA MED SMÅ BOKSTÄVER")
-print("----------------------------------------")
+print("---------------------------------------------------------")
+print("𝐒 𝐊 𝐑 𝐈 𝐕  𝐁 𝐀 𝐑 𝐀  𝐌 𝐄 𝐃  𝐒 𝐌 Å  𝐁 𝐎 𝐊 𝐒 𝐓 Ä 𝐕 𝐄 𝐑")
+print("")
+print("")
+print("•._.••´¯``•.¸¸.•`𝓗 ä 𝓷 𝓰 𝓪  𝓖 𝓾 𝓫 𝓫 𝓮`•.¸¸.•´´¯`••._.•")
+print("")
+print("")
+print("programmet skrivet av: 𝐿𝓊𝒸𝒶𝓈 𝐵𝒶𝓊𝓃𝓈𝑔𝒶𝒶𝓇𝒹")
+print("---------------------------------------------------------")
+print("")
+print("")
 
 def get_guess():
 
   # Lägger _ på alla bokstäver i gömda ordet
   # ger spelaren 01 liv
-  dashes = "_ " * len(secret_word)
+  dashes = "-" * len(secret_word)
   left = len(secret_word)
   guesses_left = 10
+  used_letters = []
+
 
   # En loop som kollar om du har slut på gissningar eller ifall _ är lika som ordet
-  while guesses_left > -1 and not dashes == secret_word:
+  while guesses_left > 0 and not dashes == secret_word:
 
     # Print the amount of dashes and guesses left
     print(dashes)
-    print("ordets längd: ", (left))
+    print("Bokstäver gissade: ", (used_letters))
     print ("Liv kvar: ", str(guesses_left))
 
     # frågar spelaren efter en gissning
     guess = input("Gissa:")
+    used_letters.append(guess)
 
     # Varnar ifall man inte skrivern en bokstav eller om man skriver fler än en bokstav
     if len(guess) != 1:
+      print("")
       print ("Din bokstav måste vara en bokstav!")
 
     # Ifall man gissar rätt så printar den det och sedan byter ut _ till bokstaven
@@ -45,7 +58,7 @@ def get_guess():
       print ("Du gissade fel.")
       guesses_left -= 1
 
-  if guesses_left < 0:
+  if guesses_left < 1:
     print ("Du förlora, ordet var: " + str(secret_word))
 
   # Om _ är lika som ordet så har spelaren vunnit.
